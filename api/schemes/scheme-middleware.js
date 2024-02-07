@@ -57,12 +57,12 @@ const validateScheme = (req, res, next) => {
   }
 */
 const validateStep = (req, res, next) => {
-  const error = { status: 400, message: "invalid step"}
+
 
   if(req.body.instructions === undefined || typeof req.body.instructions !== 'string' || req.body.instructions.trim() === ''){
-    res.json(error)
+    next({ status: 400, message: "invalid step" })
   } else if(typeof req.body.step_number !== 'number' || req.body.step_number < 1){
-    res.json(error)
+    next({ status: 400, message: "invalid step" })
   } else {
     next()
   }
